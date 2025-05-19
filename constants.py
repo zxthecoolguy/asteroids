@@ -1,8 +1,16 @@
 # Settings for the game
 
+# Game settings
+FPS = 60
+
 # Screen dimensions
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
+
+# Player settings
+PLAYER_RADIUS = 20
+PLAYER_TURN_SPEED = 300
+PLAYER_SPEED = 200
 
 # Asteroid settings
 ASTEROID_MIN_RADIUS = 20
