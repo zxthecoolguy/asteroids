@@ -3,7 +3,7 @@ from constants import *
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
-
+import sys
 
 def main():
     pygame.init()
@@ -37,6 +37,11 @@ def main():
             obj.draw(screen)
 
         pygame.display.flip()
+
+        for asteroid in asteroids:
+            if asteroid.is_colliding(player):
+                print("Game Over")
+                sys.exit()
 
         # limit the framerate to 60 FPS
         dt = clock.tick(60) / 1000
