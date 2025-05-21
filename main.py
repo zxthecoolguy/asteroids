@@ -5,7 +5,8 @@ from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
 from shot import Shot
-
+from shootingpowerup import ShootingPowerup
+import random
 
 def main():
     pygame.init()
@@ -21,6 +22,10 @@ def main():
     Shot.containers = (shots, updatable, drawable)
     AsteroidField.containers = updatable
     asteroid_field = AsteroidField()
+    powerups = pygame.sprite.Group()
+    ShootingPowerup.containers = (powerups, updatable, drawable)
+
+    last_powerup_spawn = 0
 
     Player.containers = (updatable, drawable)
 
@@ -49,6 +54,17 @@ def main():
             for asteroid2 in asteroids:
                 if asteroid1 is not asteroid2 and asteroid1.collides_with(asteroid2):
                     asteroid1.split()
+
+        for powerup in powerups:
+            if powerup.collides_with(player):
+                player.shooting_powerup()
+                powerup.kill()
+
+        if pygame.time.get_ticks() / 1000 - last_powerup_spawn >= POWERUP_SPAWN_RATE:
+            x = random.randint(50, SCREEN_WIDTH - 50)
+            y = random.randint(50, SCREEN_HEIGHT - 50)
+            ShootingPowerup(x, y)
+            last_powerup_spawn = pygame.time.get_ticks() / 1000
 
         screen.fill("black")
 
