@@ -44,6 +44,11 @@ def main():
                 if asteroid.collides_with(shot):
                     shot.kill()
                     asteroid.split()
+            
+        for asteroid1 in asteroids:
+            for asteroid2 in asteroids:
+                if asteroid1 is not asteroid2 and asteroid1.collides_with(asteroid2):
+                    asteroid1.split()
 
         screen.fill("black")
 
